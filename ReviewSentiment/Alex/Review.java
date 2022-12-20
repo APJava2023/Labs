@@ -164,7 +164,7 @@ public class Review {
       return randomNegativeAdj();
     }
   }
-
+// comment
 /** Activity 2: totalSentiment()
   * Write the code to total up the sentimentVals of each word in a review.
  */
