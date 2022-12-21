@@ -206,9 +206,9 @@ public class Review {
     // write if statements here
     if (value >= 5) stars = 4;
     else if (value >= 4) stars = 3;
-    else if (value >= 3) stars = 2;
-    else if (value >= 2) stars = 1;
-    else if (value < 2) stars = 0;
+    else if (value >= 0) stars = 2;
+    else if (value >= -1) stars = 1;
+    else stars = 0;
 
 
   
