@@ -189,7 +189,7 @@ public class Review {
    
 
 
-   return Double.parseDouble(String.format("%.2s", String.valueOf(sentimentTotal)));
+    return Double.parseDouble(String.format("%.2f", sentimentTotal));
   }
 
 
