@@ -21,7 +21,7 @@ public class Review {
   
   static{
     try {
-      Scanner input = new Scanner(new File("AP-CSA-Consumer-Review-Lab-Student-Files/cleanSentiment.csv"));
+      Scanner input = new Scanner(new File("ReviewSentiment/src/cleanSentiment.csv"));
       while(input.hasNextLine()){
         String[] temp = input.nextLine().split(",");
         sentiment.put(temp[0],Double.parseDouble(temp[1]));
@@ -36,7 +36,7 @@ public class Review {
   
   //read in the positive adjectives in postiveAdjectives.txt
      try {
-      Scanner input = new Scanner(new File("AP-CSA-Consumer-Review-Lab-Student-Files/positiveAdjectives.txt"));
+      Scanner input = new Scanner(new File("ReviewSentiment/src/positiveAdjectives.txt"));
       while(input.hasNextLine()){
         String temp = input.nextLine().trim();
       //  System.out.println(temp);
@@ -50,7 +50,7 @@ public class Review {
  
   //read in the negative adjectives in negativeAdjectives.txt
      try {
-      Scanner input = new Scanner(new File("AP-CSA-Consumer-Review-Lab-Student-Files/negativeAdjectives.txt"));
+      Scanner input = new Scanner(new File("ReviewSentiment/src/negativeAdjectives.txt"));
       while(input.hasNextLine()){
         negAdjectives.add(input.nextLine().trim());
       }
