@@ -202,7 +202,13 @@ public class Review {
 
     // determine number of stars between 0 and 4 based on totalSentiment value 
     int stars = 0; // change this!
+    double value = totalSentiment(filename);
     // write if statements here
+    if (value >= 5) stars = 4;
+    else if (value >= 4) stars = 3;
+    else if (value >= 3) stars = 2;
+    else if (value >= 2) stars = 1;
+    else if (value < 2) stars = 0;
 
 
   
