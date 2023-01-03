@@ -1,6 +1,5 @@
 package Alex;
 import java.util.Scanner;
-import java.io.File;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,6 +14,7 @@ public class Review {
   private static HashMap<String, Double> sentiment = new HashMap<String, Double>();
   private static ArrayList<String> posAdjectives = new ArrayList<String>();
   private static ArrayList<String> negAdjectives = new ArrayList<String>();
+
  
   
   private static final String SPACE = " ";
@@ -214,5 +214,45 @@ public class Review {
   
     // return number of stars
     return stars; 
+  }
+
+  public static void sortAdjectives() throws IOException {
+    File posAdj = new File("ReviewSentiment/src/positiveAdjectives.txt");
+    FileWriter posAdjFw = new FileWriter(posAdj, true);
+
+    File negAdj = new File("ReviewSentiment/src/negativeAdjectives.txt");
+    FileWriter negAdjFw = new FileWriter(negAdj, true);
+    if (textToString("ReviewSentiment/src/positiveAdjectives.txt").isEmpty() &&
+    textToString("ReviewSentiment/src/negativeAdjectives.txt").isEmpty() ) {
+      
+      for (String word : sentiment.keySet()) {
+        if (sentimentVal(word) > 0) {
+          posAdjFw.write(word + "\n");
+        }
+        else negAdjFw.write(word + "\n");
+      }
+
+      posAdjFw.close();
+      negAdjFw.close();
+    }
+    else {
+      Scanner scan = new Scanner(System.in);
+      System.out.print("It looks like target files are not empty, are you sure you want to run this again? [y/n] ");
+      
+      try {
+        String answer = scan.next();
+        System.out.println();
+        if (answer.toLowerCase().equals("y")) {
+          sortAdjectives();
+        }
+        else if (answer.toLowerCase().equals("n")) {
+          System.out.println("exiting...");
+        }
+        else sortAdjectives();
+      } catch (Exception e) {
+        System.out.println("error reading input");
+      }
+    }
+    
   }
 }
