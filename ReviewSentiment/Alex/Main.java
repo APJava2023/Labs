@@ -9,6 +9,7 @@ class Main {
       System.out.println(Review.sentimentVal("aaron"));
       System.out.println(Review.totalSentiment("ReviewSentiment/Alex/myReview.txt"));
       System.out.println(Review.starRating("ReviewSentiment/Alex/myReview.txt"));
-      Review.sortAdjectives();
+      //Review.sortAdjectives();
+      System.out.println(Review.fakeReview("ReviewSentiment/src/simpleReview.txt"));
     }
   }

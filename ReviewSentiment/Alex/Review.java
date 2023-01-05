@@ -255,4 +255,21 @@ public class Review {
     }
     
   }
+
+  public static String fakeReview(String fileName) {
+    String fileContents = textToString(fileName);
+    int index = fileContents.indexOf("*");
+    int current = 0;
+    while (index >= 0) {
+      current = index;
+      while ((Character.isAlphabetic(fileContents.charAt(current)) && !fileContents.substring(current, current + 1).equals(" ")) || current == index) {
+        current++;
+      }
+      String firstPart = fileContents.substring(0, index);
+      String lastPart = fileContents.substring(current);
+      fileContents = firstPart + randomAdjective() + lastPart;
+      index = fileContents.indexOf("*");
+    }
+    return fileContents;
+  }
 }
