@@ -257,9 +257,16 @@ public class Review {
   }
 
   public static String fakeReview(String fileName) {
+    Scanner scan = new Scanner(System.in);
     String fileContents = textToString(fileName);
     int index = fileContents.indexOf("*");
     int current = 0;
+
+    String reviewType = "";
+    while (!reviewType.equals("pos") && !reviewType.equals("neg")) {
+      System.out.println("Are you creating a positive or negative review? [pos/neg]");
+      reviewType = scan.next().toLowerCase();
+    }
     while (index >= 0) {
       current = index;
       while ((Character.isAlphabetic(fileContents.charAt(current)) && !fileContents.substring(current, current + 1).equals(" ")) || current == index) {
@@ -267,9 +274,31 @@ public class Review {
       }
       String firstPart = fileContents.substring(0, index);
       String lastPart = fileContents.substring(current);
-      fileContents = firstPart + randomAdjective() + lastPart;
+      String adjString = fileContents.substring(index, current);
+      fileContents = firstPart + advAdjectivePlace(fileContents, adjString, reviewType) + lastPart;
       index = fileContents.indexOf("*");
     }
     return fileContents;
   }
+
+  public static String advAdjectivePlace(String review, String word, String reviewIntent) {
+    if (!(reviewIntent.equals("pos") || reviewIntent.equals("neg"))) {
+      System.out.println("Error reading review intent in method Review.advAdjectivePlace()");
+      System.out.println("Ending program to avoid further issues...");
+      System.exit(0);
+    }
+    System.out.println(review);
+    Scanner scan = new Scanner(System.in);
+    switch (reviewIntent) {
+      case "pos": 
+        System.out.println("Enter a positive adjective to replace " + word);
+        break;
+      case "neg":
+        System.out.println("Enter a negative adjective to replace " + word);
+    }
+    return scan.next();
+    
+  }
 }
+
+  
