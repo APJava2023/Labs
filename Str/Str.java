@@ -2,6 +2,7 @@ package Str;
 import java.util.ArrayList;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 /**
  * A class that represents a sequence of characters. It is similar to the String
@@ -18,8 +19,8 @@ public class Str {
     /**
      * A class that represents a sequence of characters. It is similar to the String
      * 
-     * @param str  - The string to format
-     * @param args - The arguments to format the string with (in order)
+     * @param str {@code String}  - The string to format
+     * @param args {@code Object...} - The arguments to format the string with (in order)
      */
     public Str(String str, Object... args) {
         this.data = str.toCharArray();
@@ -29,8 +30,8 @@ public class Str {
     /**
      * A class that represents a sequence of characters. It is similar to the String
      * 
-     * @param data - The data to format (as a char array)
-     * @param args - The arguments to format the string with (in order)
+     * @param data {@code char[]} - The data to format (as a char array)
+     * @param args {@code Object...}- The arguments to format the string with (in order)
      */
 
     public Str(char[] data, Object... args) {
@@ -50,7 +51,7 @@ public class Str {
     /**
      * A class that represents a sequence of characters. It is similar to the String
      * 
-     * @param str - The string to format
+     * @param str {@code String} - The string to format
      */
     public Str(String str) {
         this.data = str.toCharArray();
@@ -83,7 +84,7 @@ public class Str {
     /**
      * Gets all the data in the char array.
      * 
-     * @return char array (data) of the Str object, representing the sequence of
+     * @return {@code char[]} sequence of
      *         characters.
      */
     public char[] get() {
@@ -94,10 +95,10 @@ public class Str {
      * Looks for the specified character in the Str object split by the specified
      * character.
      * 
-     * @param i - The index of the sequence of characters to look in.
-     * @param j - The index of the character to look for.
-     * @param c - The character to split the Str object by.
-     * @return The character at the specified index.
+     * @param i {@code int} - The index of the sequence of characters to look in.
+     * @param j {@code int} - The index of the character to look for.
+     * @param c {@code char} - The character to split the Str object by.
+     * @return {@code char} - The character at the specified index.
      */
     public char get(int i, int j, char c) {
         return (char) this.split(c)[i].get(j);
@@ -106,10 +107,12 @@ public class Str {
     /**
      * Shortcut for getting the character at the specified index in the Str sequence
      * split by ' '.
+     * @see #get(int, int, char)
+     * @see #split(char)
      * 
-     * @param i - The index of the sequence of characters to look in.
-     * @param j - The index of the character to look for.
-     * @return The character at the specified index.
+     * @param i {@code int} - The index of the sequence of characters to look in.
+     * @param j {@code int} - The index of the character to look for.
+     * @return {@code char} - The character at the specified index.
      */
     public char get(int i, int j) {
         return (char) this.split(' ')[i].get(j);
@@ -128,9 +131,9 @@ public class Str {
      * Returns a count of the amount of times the specified character occurs in (s)
      * String
      * 
-     * @param s - The string to match with
-     * @param c - The character to match with
-     * @return The amount of times the character occurs in the String.
+     * @param s {@code String} - The string to match with
+     * @param c {@code char} - The character to match with
+     * @return {@code int} - The amount of times the character occurs in the String.
      */
     public static int count(String s, char c) {
         int count = 0;
@@ -146,9 +149,9 @@ public class Str {
      * Returns a count of the amount of times the specified Str sequence occurs in a
      * Str object.
      * 
-     * @param s - The Str sequence to match with.
-     * @param c - The character to match with
-     * @return The amount of times the character occurs in the Str object.
+     * @param s {@code Str} - The Str sequence to match with.
+     * @param c {@code char} - The character to match with
+     * @return {@code int} - The amount of times the character occurs in the Str object.
      */
     public static int count(Str s, char c) {
         return count(s.toString(), c);
@@ -158,8 +161,8 @@ public class Str {
      * Returns a count of the amount of times the specified character occurs in the
      * Str object.
      * 
-     * @param c
-     * @return The amount of times the character occurs in the Str object.
+     * @param c {@code char} - The character to match with. 
+     * @return {@code int} - The amount of times the character occurs in the Str object.
      */
     public int count(char c) {
         int count = 0;
@@ -175,8 +178,8 @@ public class Str {
      * Returns a count of the amount of times the specified String occurs in the Str
      * object.
      * 
-     * @param s - The String to match with.
-     * @return The amount of times the String occurs in the Str object.
+     * @param s {@code String} - The String to match with.
+     * @return {@code int} - The amount of times the String occurs in the Str object.
      */
     public int count(String s) {
         int count = 0;
@@ -201,9 +204,8 @@ public class Str {
      * Looks for the specified character in the Str object and returns the index of
      * the first occurrence.
      * 
-     * @param c - The character to look for.
-     * @return The index of the first occurrence of the character in the Str object. 
-     * Returns -1 if not located. 
+     * @param c {@code char} -  The character to look for.
+     * @return {@code int} - The index of the first occurrence of the character in the Str object.
      */
     public int find(char c) {
         for (int i = 0; i < data.length; i++) {
@@ -218,8 +220,8 @@ public class Str {
      * Looks for the specified String in the Str object and returns the index of the
      * first occurrence.
      * 
-     * @param s - The Str sequence to look for.
-     * @return Index representing the first occurrence of the String in the Str
+     * @param s {@code Str} -  The Str sequence to look for.
+     * @return {@code int} - Index representing the first occurrence of the String in the Str
      *         object.
      */
     public int find(String s) {
@@ -244,8 +246,8 @@ public class Str {
      * Looks for the specified Str sequence in the Str object and returns the index
      * of the first occurrence.
      * 
-     * @param s - The Str sequence to look for.
-     * @return Index representing the first occurrence of the String in the Str
+     * @param s {@code Str} -  The Str sequence to look for.
+     * @return {@code int} - Index representing the first occurrence of the String in the Str
      *         object.
      */
     public int find(Str s) {
@@ -255,9 +257,9 @@ public class Str {
     /**
      * Collects a substring of the Str object specified by the start and end index.
      * 
-     * @param i - The start index of the substring.
-     * @param j - The end index of the substring.
-     * @return A Str object representing the substring.
+     * @param i {@code int} -  The start index of the substring.
+     * @param j {@code int} -  The end index of the substring.
+     * @return {@code Str} - A Str object representing the substring.
      */
     public Str substring(int i, int j) {
         Str s = new Str("");
@@ -271,8 +273,8 @@ public class Str {
     /**
      * Collects a substring of the Str object specified by the end index.
      * 
-     * @param i - The end index of the substring.
-     * @return A Str object representing the substring.
+     * @param i {@code int} -  The end index of the substring.
+     * @return {@code Str} - A Str object representing the substring.
      */
     public Str substring(int i) {
         return this.substring(0, i);
@@ -281,8 +283,8 @@ public class Str {
     /**
      * Appends the specified Str sequence to the end of the Str object.
      * 
-     * @param s - The Str sequence to append.
-     * @return The Str object.
+     * @param s {@code Str} -  The Str sequence to append.
+     * @return {@code self} - The Str object.
      */
     public Str append(Str s) {
         for (char c : s.toCharArray()) {
@@ -294,8 +296,10 @@ public class Str {
     /**
      * Appends the specified char to the end of the Str object.
      * 
-     * @param c - The char to append.
-     * @return The Str object.
+     * @param c {@code char} - The char to append.
+     * @return {@code self} - The Str object.
+     * @see Str#prepend(char)
+     * @see Str#append(Str)
      */
     public Str append(char c) {
         char[] data = new char[this.data.length + 1];
@@ -310,8 +314,10 @@ public class Str {
     /**
      * Prepends the specified String to the end of the Str object.
      * 
-     * @param s - The String to prepend.
-     * @return The Str object.
+     * @param s {@code String} - The String to prepend.
+     * @return {@code self} - The Str object.
+     * @see Str#append(String)
+     * @see Str#prepend(Str)
      */
     public Str prepend(String s) {
         return prepend(new Str(s));
@@ -320,8 +326,10 @@ public class Str {
     /**
      * Prepends the specified Str sequence to the end of the Str object.
      * 
-     * @param s - The Str sequence to prepend.
-     * @return The Str object.
+     * @param s {@code Str} - The Str sequence to prepend.
+     * @return {@code self} - The Str object.
+     * @see Str#append(Str)
+     * @see Str#prepend(String)
      */
     public Str prepend(Str s) {
         for (char c : s.reverse().toCharArray()) {
@@ -333,8 +341,10 @@ public class Str {
     /**
      * Prepends the specified char to the end of the Str object.
      * 
-     * @param c - The char to prepend.
-     * @return The Str object.
+     * @param c {@code char} - The char to prepend.
+     * @return {@code self} - The Str object.
+     * @see Str#append(char)
+     * @see Str#prepend(Str)
      */
     public Str prepend(char c) {
         char[] data = new char[this.data.length + 1];
@@ -350,9 +360,9 @@ public class Str {
      * Removes the specified character from the Str object.
      * 
      * @implNote THIS METHOD IS NOT YET IMPLEMENTED.
-     * @param i - Index at which to start the insertion
-     * @param s - the Str sequence to insert
-     * @return The Str object.
+     * @param i {@code int} - Index at which to start the insertion
+     * @param s {@code Str} - the Str sequence to insert
+     * @return {@code self} - The Str object.
      */
     public Str insert(int i, Str s) {
         // TODO Complete this method
@@ -363,9 +373,9 @@ public class Str {
      * Removes the specified character from the Str object.
      * 
      * @implNote THIS METHOD IS NOT YET IMPLEMENTED.
-     * @param i - Index at which to start the insertion
-     * @param c - the char to insert
-     * @return The Str object.
+     * @param i {@code int} - Index at which to start the insertion
+     * @param c {@code char} - the char to insert
+     * @return {@code self} - The Str object.
      */
     public Str insert(int i, char c) {
         // TODO Complete this method
@@ -376,13 +386,13 @@ public class Str {
      * Replaces the specified index in the Str object with the specified Str
      * sequence, creating room if necessary.
      * 
-     * @param i - Index at which to start the replacement
-     * @param s - the Str sequence to replace
-     * @return The Str object.
+     * @param i {@code int} - Index at which to start the replacement
+     * @param s {@code Str} - the Str sequence to replace
+     * @return {@code self} - The Str object.
+     * @see Str#replace(int, String)
+     * @see Str#replace(int, char)
      */
     public Str replace(int i, Str s) {
-        // This method will replace the index i in this.data with the data in s, making
-        // space for it if necessary.
         char[] data = new char[this.data.length + s.length()];
         for (int j = 0; j < i; j++) {
             data[j] = this.data[j];
@@ -401,9 +411,11 @@ public class Str {
      * Replaces the specified index in the Str object with the specified String,
      * creating room if necessary.
      * 
-     * @param i - Index at which to start the replacement
-     * @param s - the String to replace
-     * @return - The Str object.
+     * @param i {@code int} - Index at which to start the replacement
+     * @param s {@code String} - the String to replace
+     * @return {@code self} - The Str object.
+     * @see Str#replace(int, Str)
+     * @see Str#replace(int, char)
      */
     public Str replace(int i, String s) {
         return this.replace(i, new Str(s));
@@ -412,9 +424,11 @@ public class Str {
     /**
      * Replaces the specified index in the Str object with the specified char.
      * 
-     * @param i - Index at which to start the replacement
-     * @param c - the char to replace
-     * @return - The Str object.
+     * @param i {@code int} - Index at which to start the replacement
+     * @param c {@code char} - the char to replace
+     * @return {@code self} - The Str object.
+     * @see Str#replace(int, Str)
+     * @see Str#replace(int, String)
      */
     public Str replace(int i, char c) {
         int j = 0;
@@ -427,21 +441,23 @@ public class Str {
     /**
      * Removes the specified sequence from the Str object.
      * 
-     * @implNote THIS METHOD IS NOT YET IMPLEMENTED.
-     * @param i - Index at which to start the removal
-     * @param j - Index at which to end the removal
-     * @return The Str object.
+     * @param i {@code int} - Index at which to start the removal
+     * @param j {@code int} - Index at which to end the removal
+     * @return {@code self} - The Str object.
      */
     public Str remove(int i, int j) {
-        // TODO complete this method
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        for (;i<j;i++) {
+            this.remove(i);
+        }
+        return this;
     }
 
     /**
      * Removes the specified character from the index in Str object.
      * 
-     * @param i - Index to remove
-     * @return The Str object.
+     * @param i {@code int} - Index to remove
+     * @return {@code self} The Str object.
+     * @see Str#remove(char)
      */
     public Str remove(int i) {
         char[] data = new char[this.data.length - 1];
@@ -455,8 +471,9 @@ public class Str {
     /**
      * Removes the specified character from the Str object.
      * 
-     * @param c - The character to remove
-     * @return The Str object.
+     * @param c {@code char} - The character to remove
+     * @return {@code self} The Str object.
+     * @see Str#remove(int)
      */
     public Str remove(char c) {
         char[] data = new char[this.data.length - this.count(c)];
@@ -490,6 +507,7 @@ public class Str {
      * 
      * @param c - The character to trim
      * @return The Str object.
+     * @see Str#trim(char)
      */
     public Str trim(char c) {
         char[] data = new char[this.data.length - this.count(c)];
@@ -524,7 +542,9 @@ public class Str {
     /**
      * Trims leading and trailing whitespace.
      * 
-     * @return The Str object.
+     * @return {@code Str} - The Str object.
+     * @see Str#trim(char)
+     * @see Str#trim(int)
      */
     public Str trim() {
         return this.trim(' ');
@@ -534,13 +554,15 @@ public class Str {
      * Trims the specified number of characters from the beginning of the Str
      * object.
      * 
-     * @implNote THIS METHOD IS NOT YET IMPLEMENTED.
-     * @param i - The number of characters to trim
-     * @return The Str object.
+     * @param i {@code int} - The number of characters to trim
+     * @return {@code Str} - The Str object.
+     * @see Str#trim(char)
+     * @see Str#trim()
      */
     public Str trim(int i) {
-        // Already wrote way too much please spare me this method for now
-        throw new UnsupportedOperationException("Unimplemented method 'trim'");
+        for (int j = 0; j < i; j++)
+            this.remove(0);
+            return this;
     }
 
     /**
@@ -548,9 +570,10 @@ public class Str {
      * character.
      *
      * @param c - the character to split by
-     * @return an array of lists of characters
-     * @implNote Example: Fstr.split("Hello, World!", ' ') -> [List('H', 'e', 'l',
-     *           'l', o'), List(','), List('W', 'o', 'r', 'l', 'd', '!')]}
+     * @return {@code ArrayList<Character>[]} an array of lists of characters
+     * @implNote Example: 
+     * {@code Fstr.split("Hello, World!", ' ')} 
+     * -> {@code [List('H','e','l','l','o'),List(','),List('W','o','r','l','d','!')]}}
      */
     public ArrayList<Character>[] split(char c) {
         Str formatted = this.format();
@@ -577,9 +600,13 @@ public class Str {
     /**
      * Formats the Str object by replacing the delimiters with the given arguments.
      * 
-     * @param args - The arguments to replace the delimiters with represented as an
+     * @param args {@code ...Object} - The arguments to replace the delimiters with represented as an
      *             array of objects.
-     * @return the formatted Str object.
+     * @return {@code Str} - the formatted Str object.
+        * @implNote Example:
+        *           {@code Fstr = new Str("Hello, %s!")}
+        *           {@code Fstr.format("World")}
+        *           -> {@code "Hello, World!"}
      */
     public Str format(Object... args) {
         StringBuilder sb = new StringBuilder();
@@ -654,15 +681,16 @@ public class Str {
     /**
      * Formats a String object by replacing the delimiters with the given arguments.
      * 
-     * @param s    - The String object to format.
-     * @param args - The arguments to replace the delimiters with represented as an
+     * @param {@code String} s    - The String object to format.
+     * @param args {@code ...Object  }- The arguments to replace the delimiters with represented as an
      *             array of objects.
-     * @return the formatted String.
+     * @return {@code String} - the formatted String.
+     * @implNote Example:
+     *          {@code Fstr.format("Hello, %s!", "World")} -> {@code "Hello, World!"}
      */
     public static String format(String s, Object... args) {
         return new String(new Str(s).format(args).data);
     }
-
 
     public void forEach(Consumer<Character> action) {
         for (char c : this.data) {
@@ -674,6 +702,24 @@ public class Str {
         for (int i = 0; i < this.data.length; i++) {
             action.accept(i, this.data[i]);
         }
+    }
+
+
+    /**
+     * Filters the Str object by a given predicate. 
+     * Will remove all characters that do not satisfy the predicate, or meet a truthy condition.
+     * @param truth {@code Predicate<Character>} - The condition to filter by.
+     * @return {@code Str} - The filtered Str object.
+     * @implNote Example:
+     * {@code Str s = new Str("Hello, World!");}
+     * {@code s.filter(c -> c != 'o');}
+     * -> {@code "Hell, Wrld!"}
+     */
+    public Str filter(Predicate<Character> truth) {
+        for (char c : data) {
+            if (!truth.test(c)) this.remove(c);
+        }
+        return this;
     }
     
     public char[] toCharArray() {
